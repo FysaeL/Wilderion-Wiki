@@ -8,8 +8,9 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [],
   footer: Component.Footer({
     links: {
-      GitHub: "https://github.com/jackyzha0/quartz",
-      "Discord Community": "https://discord.gg/cRFFHYye7t",
+      "Сайт проекта": "https://wilderion.ru",
+      Discord: "https://discord.com/invite/S4DGsremCC",
+      Telegram: "https://t.me/wilderion_project",
     },
   }),
 }
@@ -38,7 +39,20 @@ export const defaultContentPageLayout: PageLayout = {
         { Component: Component.ReaderMode() },
       ],
     }),
-    Component.Explorer(),
+    Component.Explorer({
+      sortFn: (a, b) => {
+        const rootOrder = ["index", "intro", "quick-start", "rules", "servers", "plugins", "datapacks"]
+        const ai = rootOrder.indexOf(a.slugSegment)
+        const bi = rootOrder.indexOf(b.slugSegment)
+        if (ai >= 0 && bi >= 0) return ai - bi
+        if (ai >= 0) return -1
+        if (bi >= 0) return 1
+        if ((!a.isFolder && !b.isFolder) || (a.isFolder && b.isFolder)) {
+          return a.displayName.localeCompare(b.displayName, undefined, { numeric: true, sensitivity: "base" })
+        }
+        return a.isFolder ? -1 : 1
+      },
+    }),
   ],
   right: [
     Component.Graph(),
@@ -62,7 +76,20 @@ export const defaultListPageLayout: PageLayout = {
         { Component: Component.Darkmode() },
       ],
     }),
-    Component.Explorer(),
+    Component.Explorer({
+      sortFn: (a, b) => {
+        const rootOrder = ["index", "intro", "quick-start", "rules", "servers", "plugins", "datapacks"]
+        const ai = rootOrder.indexOf(a.slugSegment)
+        const bi = rootOrder.indexOf(b.slugSegment)
+        if (ai >= 0 && bi >= 0) return ai - bi
+        if (ai >= 0) return -1
+        if (bi >= 0) return 1
+        if ((!a.isFolder && !b.isFolder) || (a.isFolder && b.isFolder)) {
+          return a.displayName.localeCompare(b.displayName, undefined, { numeric: true, sensitivity: "base" })
+        }
+        return a.isFolder ? -1 : 1
+      },
+    }),
   ],
   right: [],
 }
