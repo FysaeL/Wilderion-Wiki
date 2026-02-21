@@ -1,3 +1,73 @@
 @use "./base.scss";
 
-// put your custom CSS here!
+// Wilderion theme overrides
+
+// Жирный текст (**...**) — основной цвет (белый в тёмной теме), как в референсе
+strong,
+b {
+  color: var(--dark);
+}
+
+// Активный элемент в хлебных крошках — светлый фон
+.breadcrumb-element:last-child a {
+  background-color: var(--lightgray);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+// Active item in sidebar — оранжевый фон (как на референсе)
+.explorer-content ul li > a.active {
+  background-color: var(--secondary);
+  color: #fff !important;
+  padding: 0.25rem 0.5rem;
+  margin: 0 -0.5rem;
+  border-radius: 4px;
+  opacity: 1;
+}
+
+// Заголовок таблицы — акцентный цвет
+th {
+  background-color: var(--secondary) !important;
+  color: #fff !important;
+  border-bottom-color: var(--secondary) !important;
+}
+
+// Callout tip/success — зелёная тема
+.callout[data-callout="tip"],
+.callout[data-callout="success"] {
+  --color: #2e7d32;
+  --border: #2e7d3244;
+  --bg: #e8f5e9;
+  --callout-icon: var(--callout-icon-tip);
+}
+
+.callout[data-callout="success"] {
+  --callout-icon: var(--callout-icon-success);
+}
+
+:root[saved-theme="dark"] .callout[data-callout="tip"],
+:root[saved-theme="dark"] .callout[data-callout="success"] {
+  --color: #fff;
+  --border: #38a169;
+  --bg: #38a169;
+}
+
+// Тёмная тема: разный фон для сайдбара и контента, заголовок таблицы
+:root[saved-theme="dark"] {
+  .sidebar.left {
+    background-color: var(--gray);
+  }
+
+  body {
+    background-color: var(--light);
+  }
+
+  .center {
+    background-color: var(--lightgray);
+  }
+
+  th {
+    background-color: #5d3831 !important;
+    border-bottom-color: #5d3831 !important;
+  }
+}
